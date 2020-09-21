@@ -102,7 +102,7 @@ var responseData ="";
       
         console.log("getting token: "+body);
       });
-      //END credential flow
+      //END credential flow==================
       // const token = await getAccessTokenSilently();
       // const token = await getAccessTokenSilently({
       //   audience: `https://dev-kinamod-01.eu.auth0.com/api/v2/`,
