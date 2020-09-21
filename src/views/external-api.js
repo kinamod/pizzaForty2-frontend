@@ -109,7 +109,7 @@ var responseData ="";
       //   scope: "read:current_user",
       // });
       console.log("token: "+token);
-      console.log("auth0: "+getIdTokenClaims);
+      console.log("auth0: "+getIdTokenClaims); 
       
 //original stuff
 // const response = await fetch(`${apiUrl}/api/authorize`,{
