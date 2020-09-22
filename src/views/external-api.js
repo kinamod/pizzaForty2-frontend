@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Button, ButtonGroup, Container } from "react-bootstrap";
 import { Highlight } from "../components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { logger } from "../utils/logger-helper";
 
 export const ExternalApi = () => {
   const [message, setMessage] = useState("");
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = process.env.REACT_APP_API_URL_LOCAL;
   const appDomain = process.env.REACT_APP_AUTH0_DOMAIN;
   const clientID = process.env.REACT_APP_AUTH0_CLIENT_ID;
   const appSecret = process.env.REACT_APP_SECRET;
@@ -14,7 +15,9 @@ export const ExternalApi = () => {
 
   const callApi = async () => {
     try {
-      const response = await fetch(`${apiUrl}/api/public-message`);
+      logger("callApi", "message sent here");
+
+      const response = await fetch(`http://localhost:7000/api/public-message`);
 
       const responseData = await response.json();
 
@@ -29,9 +32,9 @@ var responseData ="";
     if(user.email_verified){
     try {
       const token = await getAccessTokenSilently();
-      console.log("email verified: "+user.email_verified);
-
-      console.log("token: "+token)
+      logger("callSecureApi","email verified: "+user.email_verified);
+      logger("callSecureApi","apiUrl: "+apiUrl +" - "+appDomain +" - "+clientID +" - "+audience);
+      logger("callSecureApi","token: "+token)
 
       const response = await fetch(`${apiUrl}/api/order-pizza`, {
         headers: {
@@ -58,7 +61,7 @@ var responseData ="";
 
      
 
-  //     console.log("getGoogleAuth - token: "+token)
+  //     logger("callSecureApi","getGoogleAuth - token: "+token)
 
   //     const response = await fetch(`${apiUrl}/api/authorize`, {
   //       headers: {
@@ -100,7 +103,7 @@ var responseData ="";
       request(options, function (error, response, body) {
         if (error) throw new Error(error);
       
-        console.log("getting token: "+body);
+        logger("callGoogleApi","getting token: "+body);
       });
       //END credential flow==================
       // const token = await getAccessTokenSilently();
@@ -108,8 +111,8 @@ var responseData ="";
       //   audience: `https://dev-kinamod-01.eu.auth0.com/api/v2/`,
       //   scope: "read:current_user",
       // });
-      console.log("token: "+token);
-      console.log("auth0: "+getIdTokenClaims); 
+      logger("callGoogleApi","token: "+token);
+      logger("callGoogleApi","auth0: "+getIdTokenClaims); 
       
 //original stuff
 // const response = await fetch(`${apiUrl}/api/authorize`,{
@@ -125,7 +128,7 @@ var responseData ="";
       // setMessage(responseData);
      
     } catch (error) {
-      console.log("Caught Error: "+error);
+      logger("callGoogleApi","Caught Error: "+error);
       setMessage(error.message);
     }
     //END original stuff
