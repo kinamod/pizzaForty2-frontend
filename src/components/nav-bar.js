@@ -27,11 +27,11 @@ const MainNav = () => (
     </Nav.Link>
     <Nav.Link
       as={RouterNavLink}
-      to="/external-api"
+      to="/orderpizza-api"
       exact
       activeClassName="router-link-exact-active"
     >
-      External API
+      Order Pizza
     </Nav.Link>
   </Nav>
 );

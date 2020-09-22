@@ -1,5 +1,5 @@
-import ExternalApi from "./external-api";
+import OrderPizzaApi from "./orderpizza-api";
 import Home from "./home";
 import Profile from "./profile";
 
-export { ExternalApi, Home, Profile };
+export { OrderPizzaApi as OrderPizzaApi, Home, Profile };

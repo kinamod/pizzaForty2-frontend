@@ -4,7 +4,7 @@ import { Highlight } from "../components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { logger } from "../utils/logger-helper";
 
-export const ExternalApi = () => {
+export const OrderPizzaApi = () => {
   const [message, setMessage] = useState("");
   const apiUrl = (process.env.REACT_APP_RUNNING_LOCALLY) ? process.env.REACT_APP_API_URL_LOCAL : process.env.REACT_APP_API_URL ;
   const appDomain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -137,7 +137,7 @@ var responseData ="";
 
   return (
     <Container className="mb-5">
-      <h1>External API</h1>
+      <h1>Pizza Ordering</h1>
       <p>
         You use will use a button to call an external API using an access token,
         and the API will validate it using the API's audience value.{" "}
@@ -165,4 +165,4 @@ var responseData ="";
   );
 };
 
-export default ExternalApi;
+export default OrderPizzaApi;

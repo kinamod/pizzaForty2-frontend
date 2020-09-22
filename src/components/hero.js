@@ -1,15 +1,16 @@
 import React from "react";
 
-const logo = "https://cdn.auth0.com/blog/auth0-react-sample/assets/logo.svg";
-
+const logo = "https://i.ibb.co/x3Dk0LK/pizza42-Logo.png";
+const styleLogo= {
+  width: "20em",
+}
 const Hero = () => (
   <div className="text-center hero my-5">
-    <img className="mb-3 app-logo" src={logo} alt="React logo" width="120" />
-    <h1 className="mb-4">React.js Sample Project</h1>
+    <img className="mb-3" src={logo} alt="Pizza42 logo" style={styleLogo} />
+    <h1 className="mb-4">Pizza 42 Web Application</h1>
 
     <p className="lead">
-      This is a sample application that demonstrates an authentication flow for
-      an SPA, using{" "}
+      This is a sample application that will pretend to order you pizza using{" "}
       <a
         target="_blank"
         rel="noopener noreferrer"

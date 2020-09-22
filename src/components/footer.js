@@ -4,9 +4,9 @@ const Footer = () => (
   <footer className="bg-light p-3 text-center">
     <div className="logo" />
     <p>
-      Sample project provided by{" "}
-      <a target="_blank" rel="noopener noreferrer" href="https://auth0.com">
-        Auth0
+      A Pizza Ordering Application {" "}
+      <a target="_blank" rel="noopener noreferrer" href="https://github.com/kinamod">
+        Kinamod
       </a>
     </p>
   </footer>
