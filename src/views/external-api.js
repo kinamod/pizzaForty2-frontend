@@ -6,7 +6,7 @@ import { logger } from "../utils/logger-helper";
 
 export const ExternalApi = () => {
   const [message, setMessage] = useState("");
-  const apiUrl = process.env.REACT_APP_API_URL_LOCAL;
+  const apiUrl = (process.env.REACT_APP_RUNNING_LOCALLY) ? process.env.REACT_APP_API_URL_LOCAL : process.env.REACT_APP_API_URL ;
   const appDomain = process.env.REACT_APP_AUTH0_DOMAIN;
   const clientID = process.env.REACT_APP_AUTH0_CLIENT_ID;
   const appSecret = process.env.REACT_APP_SECRET;
@@ -15,9 +15,9 @@ export const ExternalApi = () => {
 
   const callApi = async () => {
     try {
-      logger("callApi", "message sent here");
+      logger("callApi", "backendAPI: "+apiUrl);
 
-      const response = await fetch(`http://localhost:7000/api/public-message`);
+      const response = await fetch(`${apiUrl}/api/public-message`);
 
       const responseData = await response.json();
 
