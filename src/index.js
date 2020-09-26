@@ -8,9 +8,9 @@ import "./index.css";
 
 ReactDOM.render(
   <Router>
-  <Auth0ProviderWithHistory>
-    <App />
-  </Auth0ProviderWithHistory>
-</Router>,
-document.getElementById("root")
+    <Auth0ProviderWithHistory>
+      <App />
+    </Auth0ProviderWithHistory>
+  </Router>,
+  document.getElementById("root")
 );

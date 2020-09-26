@@ -1,13 +1,23 @@
 import React, { useState } from "react";
-import { Button, ButtonGroup, Container } from "react-bootstrap";
+import { Button, ButtonGroup, Container, Modal } from "react-bootstrap";
 import { Highlight } from "../components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { logger } from "../utils/logger-helper";
+// import BetterModal from "../components/better-modal";
 
 export const OrderPizzaApi = () => {
   const [message, setMessage] = useState("");
+  // const { handleShowModal, handleCloseModal } = BetterModal();
   const apiUrl = (process.env.REACT_APP_RUNNING_LOCALLY) ? process.env.REACT_APP_API_URL_LOCAL : process.env.REACT_APP_API_URL;
   const { user, getAccessTokenSilently } = useAuth0();
+
+  //the Modals
+  const [showModal, setShowModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("Default Title");
+  const [modalMessage, setModalMessage] = useState("Default Message");
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+  //the modal
 
   const callApi = async () => {
 
@@ -42,25 +52,28 @@ export const OrderPizzaApi = () => {
         });
 
         responseData = await response.json();
-
+        setModalTitle("Pizza Ordered");
+        setModalMessage(`Thanks ${user.name}, your pizza has been ordered.\nHave a nice day!`);
+        handleShowModal();
 
       } catch (error) {
         setMessage(error.message);
       }
     } else {
-      responseData = "You must first verify your email address";
+      responseData = "You must first verify your email address.";
+      setModalTitle("Unverified Email Address");
+      setModalMessage("You must first verify your email address.");
+      handleShowModal();
+      //modalMessage = "You must first verify your email address.";
     }
-    setMessage(responseData);
+    setMessage();
   };
-
 
   return (
     <Container className="mb-5">
       <h1>Pizza Ordering</h1>
       <p>
-        You use will use a button to call an external API using an access token,
-        and the API will validate it using the API's audience value.{" "}
-        <strong>This route should be private</strong>.
+        From here you can order your pizza. There is only one flavour! <strong> please </strong> be sure that you have verified your email address, else you won't be able to order.
       </p>
       <ButtonGroup>
         <Button onClick={callApi} color="primary" className="mt-5">
@@ -78,6 +91,19 @@ export const OrderPizzaApi = () => {
           <Highlight>{JSON.stringify(message, null, 2)}</Highlight>
         </div>
       )}
+
+      {/* Modal Section */}
+      <Modal show={showModal} onHide={handleCloseModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>{modalTitle}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{modalMessage}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleCloseModal}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
