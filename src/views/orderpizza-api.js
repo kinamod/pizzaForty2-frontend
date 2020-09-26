@@ -3,7 +3,6 @@ import { Button, ButtonGroup, Container, Modal } from "react-bootstrap";
 import { Highlight } from "../components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { logger } from "../utils/logger-helper";
-// import BetterModal from "../components/better-modal";
 
 export const OrderPizzaApi = () => {
   const [message, setMessage] = useState("");
