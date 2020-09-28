@@ -1,13 +1,19 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import { Highlight } from "../components";
+import { logger } from "../utils/logger-helper";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
 
-  const { user } = useAuth0();
+  const apiUrl = (process.env.REACT_APP_RUNNING_LOCALLY) ? process.env.REACT_APP_API_URL_LOCAL : process.env.REACT_APP_API_URL;
+  const { user, getAccessTokenSilently } = useAuth0();
   const { name, picture, email } = user;
+  const [message, setMessage] = useState("");
+  const [showAugmentedProfile, setShowAugmentedProfile] = useState(false);
+  const handleHideAugProfile = () => setShowAugmentedProfile(false);
+  const handleShowAugProfile = () => setShowAugmentedProfile(true);
 
   return (
     <Container className="mb-5">
@@ -23,12 +29,53 @@ const Profile = () => {
           <h2>{name}</h2>
           <p className="lead text-muted">{email}</p>
         </Col>
+        <Col>
+          {showAugmentedProfile ?
+            <Button onClick={getFullID} variant="secondary" className="mt-5">
+              Hide Augmented Profile
+            </Button>
+            :
+            <Button onClick={getFullID} variant="primary" className="mt-5">
+              Show Augmented Profile
+            </Button>
+          }
+        </Col>
       </Row>
       <Row>
-        <Highlight>{JSON.stringify(user, null, 1)}</Highlight>
+        {showAugmentedProfile ? <Highlight>{JSON.stringify(message, null, 1)}</Highlight> : <Highlight>{JSON.stringify(user, null, 1)}</Highlight>}
       </Row>
     </Container>
   );
+
+  async function getFullID() {
+    logger("getFullId:\n" + showAugmentedProfile);
+    if (showAugmentedProfile) {
+      handleHideAugProfile();
+    } else {
+      handleShowAugProfile()
+
+      try {
+        logger("fullID", "backendAPI: " + apiUrl);
+
+        const token = await getAccessTokenSilently();
+        logger("fullID", "token: " + token + user.sub)
+
+        const response = await fetch(`${apiUrl}/api/get-full-id`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            UserID: user.sub,
+          },
+        });
+
+        logger("getFullID: response ", response);
+        const responseData = await response.json();
+        setMessage(responseData);
+        logger("getFullID: response data", responseData);
+      } catch (error) {
+        setMessage(error.message);
+      }
+    }
+  }
 
 };
 
