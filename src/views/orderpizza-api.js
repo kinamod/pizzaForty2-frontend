@@ -40,8 +40,8 @@ export const OrderPizzaApi = () => {
     if (user.email_verified) {
       try {
         const token = await getAccessTokenSilently();
-        logger("callSecureApi", "email verified: " + user.email_verified);
-        logger("callSecureApi", "token: " + token)
+        logger("orderPizza" + "email verified: " + user.email_verified);
+        logger("orderPizza" + "token: " + token)
 
         const response = await fetch(`${apiUrl}/api/order-pizza`, {
           headers: {
@@ -50,7 +50,7 @@ export const OrderPizzaApi = () => {
         });
 
         responseData = await response.json();
-        console.log(responseData)
+        logger("orderPizza" + responseData)
         setModalTitle("Pizza Ordered");
         if (responseData.pizzaStatus) {
           setModalMessage(`Thanks for your order ${user.name}, ${responseData.msg}!`);

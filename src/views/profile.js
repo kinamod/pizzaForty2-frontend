@@ -52,8 +52,8 @@ const Profile = () => {
     if (showAugmentedProfile) {
       handleHideAugProfile();
     } else {
-      handleShowAugProfile()
-
+      setMessage("Fetching...");
+      handleShowAugProfile();
       try {
         logger("fullID", "backendAPI: " + apiUrl);
 
