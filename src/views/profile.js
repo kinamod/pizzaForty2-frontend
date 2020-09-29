@@ -5,7 +5,7 @@ import { logger } from "../utils/logger-helper";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
-const Profile = () => {
+export const Profile = () => {
 
   const apiUrl = (process.env.REACT_APP_RUNNING_LOCALLY) ? process.env.REACT_APP_API_URL_LOCAL : process.env.REACT_APP_API_URL;
   const { user, getAccessTokenSilently } = useAuth0();
@@ -14,6 +14,36 @@ const Profile = () => {
   const [showAugmentedProfile, setShowAugmentedProfile] = useState(false);
   const handleHideAugProfile = () => setShowAugmentedProfile(false);
   const handleShowAugProfile = () => setShowAugmentedProfile(true);
+
+  const getFullID = async () => {
+    logger("getFullId:\n" + showAugmentedProfile);
+    if (showAugmentedProfile) {
+      handleHideAugProfile();
+    } else {
+      setMessage("Fetching...");
+      handleShowAugProfile();
+      try {
+        logger("fullID", "backendAPI: " + apiUrl);
+
+        const token = await getAccessTokenSilently();
+        logger("fullID", "token: " + token + user.sub)
+
+        const response = await fetch(`${apiUrl}/api/get-full-id`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            UserID: user.sub,
+          },
+        });
+
+        logger("getFullID: response ", response);
+        const responseData = await response.json();
+        setMessage(responseData);
+        logger("getFullID: response data", responseData);
+      } catch (error) {
+        setMessage(error.message);
+      }
+    }
+  }
 
   return (
     <Container className="mb-5">
@@ -46,37 +76,6 @@ const Profile = () => {
       </Row>
     </Container>
   );
-
-  async function getFullID() {
-    logger("getFullId:\n" + showAugmentedProfile);
-    if (showAugmentedProfile) {
-      handleHideAugProfile();
-    } else {
-      setMessage("Fetching...");
-      handleShowAugProfile();
-      try {
-        logger("fullID", "backendAPI: " + apiUrl);
-
-        const token = await getAccessTokenSilently();
-        logger("fullID", "token: " + token + user.sub)
-
-        const response = await fetch(`${apiUrl}/api/get-full-id`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            UserID: user.sub,
-          },
-        });
-
-        logger("getFullID: response ", response);
-        const responseData = await response.json();
-        setMessage(responseData);
-        logger("getFullID: response data", responseData);
-      } catch (error) {
-        setMessage(error.message);
-      }
-    }
-  }
-
 };
 
 export default Profile;
