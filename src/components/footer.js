@@ -4,7 +4,7 @@ const Footer = () => (
   <footer className="bg-light p-3 text-center">
     {/* <div className="logo" /> */}
     <p>
-      A Pizza Ordering Application {" "}
+      A Pizza Ordering Application by {" "}
       <a target="_blank" rel="noopener noreferrer" href="https://github.com/kinamod">
         Kinamod
       </a>

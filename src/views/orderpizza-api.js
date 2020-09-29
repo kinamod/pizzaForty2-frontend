@@ -40,8 +40,8 @@ export const OrderPizzaApi = () => {
     if (user.email_verified) {
       try {
         const token = await getAccessTokenSilently();
-        logger("orderPizza" + "email verified: " + user.email_verified);
-        logger("orderPizza" + "token: " + token)
+        logger("orderPizza", "email verified: " + user.email_verified);
+        logger("orderPizza", "token: " + token)
 
         const response = await fetch(`${apiUrl}/api/order-pizza`, {
           headers: {
