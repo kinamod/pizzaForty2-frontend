@@ -28,10 +28,9 @@ export const Profile = () => {
         const token = await getAccessTokenSilently();
         logger("fullID", "token: " + token + user.sub)
 
-        const response = await fetch(`${apiUrl}/api/get-full-id`, {
+        const response = await fetch(`${apiUrl}/api/get-full-id/${user.sub}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
-            UserID: user.sub,
+            Authorization: `Bearer ${token}`
           },
         });
 
