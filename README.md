@@ -5,8 +5,8 @@ This repository hosts a React project that defines a Single-Page Application (SP
 # User States
 This application has three user tiers:  
 - [Signed Up](#signed-up)  
-- [Email Verified](Emai-verified)  
-- [Google Account or Google Account linked](Google-Account-or-Google-Account-Linked)  
+- [Email Verified](#Email-verified)  
+- [Google Account or Google Account linked](#Google-Account-or-Google-Account-Linked)  
 
 ## Signed Up
 A signed up user is able to view their profile data on the [Profile](https://pizzafortytwodsj.herokuapp.com/profile) page and get a generic _"Public Message"_ from the [Order Pizza](https://pizzafortytwodsj.herokuapp.com/orderpizza-api) page.
