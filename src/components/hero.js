@@ -6,8 +6,7 @@ const styleLogo = {
   width: "20em",
 }
 const Hero = () => {
-  const { user, isAuthenticated } = useAuth0();
-  const { name } = user;
+  const { user } = useAuth0();
 
   return (
     <div className="text-center hero my-5">
@@ -15,7 +14,7 @@ const Hero = () => {
       <h1 className="mb-4">Pizza 42 Web Application</h1>
 
       <p className="lead">
-        {isAuthenticated ? `Hi ${name}, ` : null}
+        {user ? `Hi ${user.name}, ` : null}
         This is a sample application that will pretend to order you pizza using{" "}
         <a
           target="_blank"
