@@ -77,7 +77,7 @@ export const OrderPizzaApi = () => {
 
   return (
     <Container className="mb-5">
-      <h1>Pizza Ordering</h1>
+      <h1>Order Pizza</h1>
       <p>
         From here you can order your pizza. There is only one flavour! <strong> please </strong> be sure that you have verified your email address, else you won't be able to order.
       </p>
@@ -87,6 +87,9 @@ export const OrderPizzaApi = () => {
         </Button>
         <Button onClick={orderPizza} color="primary" className="mt-5">
           Order My Pizza
+        </Button>
+        {/* <Button onClick={getUserList} color="primary" className="mt-5">
+          Get User List
         </Button>
         {/* Testing API call buttons
         <Button onClick={sendVerifyEmailLink} variant="secondary" className="mt-5">
@@ -151,6 +154,30 @@ export const OrderPizzaApi = () => {
   }
 
   // Testing functions
+
+  // const getUserList = async () => {
+
+  //   try {
+  //     logger("getUserList", "backendAPI: " + apiUrl);
+
+  //     const token = await getAccessTokenSilently();
+
+  //     const response = await fetch(`${apiUrl}/api/get-user-list`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+
+  //     const responseData = await response.json();
+  //     logger("getUserList", response + " : " + responseData);
+  //     setMessage(responseData);
+  //   } catch (error) {
+  //     setMessage(error.message);
+  //   }
+  // };
+
+
+
   // async function getFullID() {
 
   //   try {

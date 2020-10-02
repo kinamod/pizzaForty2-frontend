@@ -5,7 +5,7 @@ import { logger } from "../utils/logger-helper";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
-export const Profile = () => {
+const Profile = () => {
 
   const apiUrl = (process.env.REACT_APP_RUNNING_LOCALLY) ? process.env.REACT_APP_API_URL_LOCAL : process.env.REACT_APP_API_URL;
   const { user, getAccessTokenSilently } = useAuth0();

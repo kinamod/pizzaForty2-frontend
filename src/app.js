@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { NavBar, Footer, Loading, PrivateRoute } from "./components";
-import { Home, Profile, OrderPizzaApi } from "./views";
+import { Home, Profile, OrderPizzaApi, UsersInfo } from "./views";
 
 import "./app.css";
 
@@ -23,6 +23,7 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/orderpizza-api" component={OrderPizzaApi} />
+          <PrivateRoute path="/usersinfo" component={UsersInfo} />
         </Switch>
       </Container>
       <Footer />
