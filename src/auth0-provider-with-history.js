@@ -19,6 +19,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
       redirectUri={window.location.origin}
       onRedirectCallback={onRedirectCallback}
       audience={audience}
+      connection_scope="https://www.googleapis.com/auth/contacts.readonly"  //Declare more specific scopes here for IdP
     >
       {children}
     </Auth0Provider>
