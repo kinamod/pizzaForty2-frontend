@@ -139,10 +139,10 @@ export const OrderPizzaApi = () => {
       logger("verifyemail", "email verified: " + user.email_verified);
       logger("verifyemail", "token: " + token)
 
-      const response = await fetch(`${apiUrl}/api/verify-email`, {
+      const response = await fetch(`${apiUrl}/api/verify-email/${user.sub}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-          UserID: user.sub
+          //UserID: user.sub
         },
       });
 
