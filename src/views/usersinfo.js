@@ -62,7 +62,7 @@ const UsersInfo = () => {
         }
         if (genderConnections.length < 20) {    //Makes the graph more interesting for a demo
             logger("genderConnections before more", genderConnections);
-            genderConnections = genderConnections.concat(generateMoreDataForDemo(1000, genderConnections));
+            genderConnections = genderConnections.concat(generateMoreDataForDemo(100, genderConnections));
             logger("genderConnections AFTER more", genderConnections);
         }
         var maxConnections = 0;
@@ -100,7 +100,7 @@ const UsersInfo = () => {
     function groupValuesForHistogram(genderConnections, maxValue) {
         console.log("qwertyuiop")
         logger("groupValuesForHistogram", "entered");
-        let noIntervals = 20
+        let noIntervals = 12
         let interval = maxValue / noIntervals;
         let femaleConnectionsGrouped = new Array(noIntervals).fill(0);
         let maleConnectionsGrouped = new Array(noIntervals).fill(0);
